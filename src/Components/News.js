@@ -2,19 +2,34 @@ import React, { Component } from 'react'
 import NewsItem from './NewsItem';
 import PrevNextBtns from './PrevNextBtns';
 import Spinner from './Spinner';
-export default class News extends Component {
+import PropTypes from 'prop-types';
 
-    constructor(){
-        super();
+export default class News extends Component {
+    static defaultProps={
+        country:"in",
+        category:"general",
+        pageSize:6
+    }
+    static propTypes={
+        country:PropTypes.string,
+        category:PropTypes.string,
+        pageSize:PropTypes.number
+    }
+    capitalizeFirstLetter = (string)=> {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      }
+    constructor(props){
+        super(props);
         this.state={
             articles:[],
             loading:false,
-            page:1
+            page:1,
+            totalPageResults:0
         }
+        document.title=`${this.props.category} -HV news`;
     }
-   
-    async componentDidMount(){
-        let url="https://newsapi.org/v2/top-headlines?country=in&apiKey=481f4f13da2a4f6ba5bae19cac47e80f&page=1&pageSize=6";
+    async updateNews(){
+        let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=481f4f13da2a4f6ba5bae19cac47e80f&page=${this.state.page}&pageSize=${this.props.pageSize}`;
         this.setState({
             loading:true
         });
@@ -23,46 +38,35 @@ export default class News extends Component {
         console.log(parsedData);
         this.setState({
             articles:parsedData.articles,
-            loading:false
+            loading:false,
+            totalPageResults: parsedData.totalResults
         })
+    }
+    async componentDidMount(){
+        this.updateNews();
     }
     handleprevClick=async()=>{
-        let url=`https://newsapi.org/v2/top-headlines?country=in&apiKey=481f4f13da2a4f6ba5bae19cac47e80f&page=${this.state.page-1}&pageSize=6`;
         this.setState({
-            loading:true
+            page:this.state.page-1
         });
-        let data=await fetch(url);
-        let parsedData=await data.json();
-        console.log(parsedData);
-        this.setState({
-            articles:parsedData.articles ,
-            page:this.state.page-1,
-            loading:false
-        })
+        this.updateNews();
     }
     handlenextClick=async()=>{
-        let url=`https://newsapi.org/v2/top-headlines?country=in&apiKey=481f4f13da2a4f6ba5bae19cac47e80f&page=${this.state.page+1}&pageSize=6`;
         this.setState({
-            loading:true
+            page:this.state.page+1
         });
-        let data=await fetch(url);
-        let parsedData=await data.json();
-        console.log(parsedData);
-        this.setState({
-            articles:parsedData.articles ,
-            page:this.state.page+1,
-            loading:false
-        })
+        this.updateNews();
     }
     render() {
         return (
             <div className="container my-3">
-                <h1 className="text-center text-danger">News King-Top Headlines</h1>
+                <h1 className="text-center text-danger">HV News-Top {this.capitalizeFirstLetter(this.props.category)} Headlines</h1>
                 {this.state.loading&&<Spinner/>}
                 {!this.state.loading&&<PrevNextBtns 
                 handleprevClick={this.handleprevClick}
                 handlenextClick={this.handlenextClick}    
                 page={this.state.page}
+                totalPages={this.state.totalPageResults}
                 />}
                 <div className="row " > 
                 {!this.state.loading&&this.state.articles.map((element)=>{
@@ -70,6 +74,9 @@ export default class News extends Component {
                             <NewsItem title={element.title} description={element.description}
                             imageUrl={element.urlToImage} 
                             url={element.url}
+                            author={element.author}
+                            date={element.publishedAt}
+                            source={element.source.name}
                             />
                         </div>
                 })}
@@ -77,6 +84,7 @@ export default class News extends Component {
                 handleprevClick={this.handleprevClick}
                 handlenextClick={this.handlenextClick}    
                 page={this.state.page}
+                totalPages={this.state.totalPageResults}
                 />
                 </div>
             </div>
