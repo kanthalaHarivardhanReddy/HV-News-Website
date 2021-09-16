@@ -2,10 +2,19 @@ import React, { Component } from 'react'
 
 export default class NewsItem extends Component {
     render() {
-        let {title,description,imageUrl,url,author,date}=this.props;
+        let {title,description,imageUrl,url,author,date,source}=this.props;
         return (
             <div>
                 <div className="card" >
+                    <div style={{
+                            display: 'flex',
+                            justifyContent: 'flex-end',
+                            position: 'absolute',
+                            right: '0'
+                        }
+                        }>
+                        <span className="badge rounded-pill bg-danger"> {source} </span>
+                    </div>
                 <img src={!imageUrl?"https://fdn.gsmarena.com/imgroot/news/21/08/xiaomi-smart-home-india-annoucnements/-476x249w4/gsmarena_00.jpg":imageUrl} className="card-img-top" alt="img"/>
                 <div className="card-body">
                     <h5 className="card-title">{title}</h5>
