@@ -17,6 +17,7 @@ export default class App extends Component {
     progress:0
   }
   apiKey=process.env.REACT_APP_NEWS_API;
+  // apiKey="481f4f13da2a4f6ba5bae19cac47e80f"
   setProgress=(progress)=>{
     this.setState({progress:progress});
   }

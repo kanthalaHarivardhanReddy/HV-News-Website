@@ -1,0 +1,48 @@
+Website:newsapi.org
+
+result/output of api:
+{
+"status": "ok",
+"totalResults": 38,
+"articles": [
+{
+"source": {
+"id": "nbc-news",
+"name": "NBC News"
+},
+"author": "Elisha Fieldstadt",
+"title": "Student dead, others injured after drive-by shooting at Kentucky school bus stop - NBC News",
+"description": "Two teens were shot, one fatally, while waiting for their school bus in Louisville, Kentucky, Wednesday morning, police said.",
+"url": "https://www.nbcnews.com/news/us-news/student-dead-others-injured-after-drive-shooting-kentucky-school-bus-n1279826",
+"urlToImage": "https://media-cldnry.s-nbcnews.com/image/upload/t_nbcnews-fp-1200-630,f_auto,q_auto:best/newscms/2021_38/3507530/210922-louisville-shooting-jm-0923.jpg",
+"publishedAt": "2021-09-22T16:06:00Z",
+"content": "Two Kentucky teenagers were shot, one fatally, while waiting Wednesday morning for their school bus, police said.\r\nThe students were on a corner in the Russell neighborhood of Louisville around 6:30 … [+1270 chars]"
+},
+{
+"source": {
+"id": "cnn",
+"name": "CNN"
+},
+"author": "Kevin Liptak, CNN",
+"title": "Biden set to hold high-stakes call with Macron amid diplomatic crisis - CNN",
+"description": "President Joe Biden spoke for the first time Wednesday with French President Emmanuel Macron after a major diplomatic crisis exploded between the two longtime allies over a deal to equip Australia with nuclear-powered submarines.",
+"url": "https://www.cnn.com/2021/09/22/politics/macron-biden-call/index.html",
+"urlToImage": "https://cdn.cnn.com/cnnnext/dam/assets/210613200451-biden-macron-g7-2021-super-tease.jpg",
+"publishedAt": "2021-09-22T15:30:00Z",
+"content": "(CNN)President Joe Biden spoke for the first time Wednesday with French President Emmanuel Macron after a major diplomatic crisis exploded between the two longtime allies over a deal to equip Austral… [+7563 chars]"
+},
+{
+"source": {
+"id": null,
+"name": "NBCSports.com"
+},
+"author": "Michael David Smith",
+"title": "Tua Tagovailoa out this week, Jacoby Brissett starts for Dolphins vs. Raiders - NBC Sports",
+"description": "Dolphins quarterback Tua Tagovailoa will miss at least one game after suffering fractured ribs on Sunday. Coach Brian Flores confirmed today that Tagovailoa is out Sunday against the Raiders. Jacoby Brissett will start. Tagovailoa suffered the injury in last …",
+"url": "https://profootballtalk.nbcsports.com/2021/09/22/tua-tagovailoa-out-this-week-jacoby-brissett-starts-for-dolphins-vs-raiders/",
+"urlToImage": "https://profootballtalk.nbcsports.com/wp-content/uploads/sites/25/2021/09/GettyImages-1341536432-e1632324106171.jpg",
+"publishedAt": "2021-09-22T15:21:00Z",
+"content": "godkingskovald says:September 22, 2021 at 12:11 pm\r\nTua looked a free defender in the eye and went back to his reads like he didnt even see him and got crushed. He just doesnt have it yet.___________… [+623 chars]"
+}
+]
+}

@@ -31,7 +31,8 @@ export default class News extends Component {
     }
     async updateNews(){
         this.props.setProgress(10);
-        let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey={this.props.apiKey}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+        console.log(this.props.apiKey+" this is api key")
+        let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
         this.props.setProgress(30);
         let data=await fetch(url);
         this.props.setProgress(50);
@@ -62,7 +63,8 @@ export default class News extends Component {
     }
     fetchData=async()=>{
         this.setState({page:this.state.page+1});
-        let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey={this.props.apiKey}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+        
+        let url=`https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&page=${this.state.page}&pageSize=${this.props.pageSize}`;
         let data=await fetch(url);
         let parsedData=await data.json();
         console.log(parsedData);
@@ -73,23 +75,19 @@ export default class News extends Component {
     }
     render() {
         return (
-            <div className="container my-3">
-                <h1 className="text-center text-primary" style={{margin:'70px 0 20px 0'}}>HV News Top {this.capitalizeFirstLetter(this.props.category)} Headlines</h1>
-                {/* {this.state.loading&&<Spinner/>} */}
-                <div className="row " > 
+            <>
+            <h1 className="text-center text-primary" style={{margin:'70px 0 20px 0'}}>HV News Top {this.capitalizeFirstLetter(this.props.category)} Headlines</h1>
+                {this.state.loading&&<Spinner/>}
                 <InfiniteScroll
                 dataLength={this.state.articles.length} //This is important field to render the next data
                 next={this.fetchData}
                 hasMore={this.state.articles.length!==this.state.totalPageResults}
                 loader={<Spinner/>}
-                endMessage={
-                    <p style={{ textAlign: 'center' }}>
-                        <b>You have seen it all</b>
-                    </p>
-                }
                 >
+            <div className="container my-3">
+                <div className="row " > 
                 {!this.state.loading&&this.state.articles.map((element)=>{
-                    return <div className="col-md-4 my-3" key={element.url}>
+                    return <div className="col-md-4" key={element.url}>
                             <NewsItem title={element.title} description={element.description}
                             imageUrl={element.urlToImage} 
                             url={element.url}
@@ -98,7 +96,9 @@ export default class News extends Component {
                             source={element.source.name}
                             />
                         </div>
-                })}
+                    })}
+                </div>
+            </div>
                 </InfiniteScroll>
                 {/* <PrevNextBtns 
                 handleprevClick={this.handleprevClick}
@@ -106,8 +106,7 @@ export default class News extends Component {
                 page={this.state.page}
                 totalPages={this.state.totalPageResults}
                 /> */}
-                </div>
-            </div>
+            </>
         )
     }
 }
